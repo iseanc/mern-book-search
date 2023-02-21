@@ -2,12 +2,12 @@ const express = require('express');
 // require Apollo Server
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const db = require('./config/connection');
 // setup for typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection');
 
 // TODO: Determine if /routes can be removed
-const routes = require('./routes');
+// const routes = require('./routes');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-app.use(routes);
+// app.use(routes);
 
 // OLD DATABASE CONNECTION...
 // db.once('open', () => {
@@ -44,7 +44,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
       console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
     })
   })
-  };
+};
 
-   // Call the async function to start the server
-   startApolloServer(typeDefs, resolvers);
+// Call the async function to start the server
+ startApolloServer(typeDefs, resolvers);
