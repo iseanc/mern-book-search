@@ -1,7 +1,9 @@
+const { Book, User} = require('../models');
+
 const resolvers = {
  Query: {
-  A: async () => {
-    return "a";
+  me: async () => {
+    return await User.find({});
   }
  }
 }
