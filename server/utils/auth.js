@@ -25,6 +25,7 @@ module.exports = {
       req.user = data;
     } catch {
       console.log('Invalid token');
+      // TODO: comment out this line if it errors, like Jessica Oboh's code
       return res.status(400).json({ message: 'invalid token!' });
     }
 

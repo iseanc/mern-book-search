@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 // TODO: Add client-side mutations
 
@@ -31,13 +31,13 @@ export const ADD_USER = gql`
 
 //SAVE_BOOK will execute the saveBook mutation.
 export const SAVE_BOOK = gql`
-  mutation saveBook($userId: ID!, $bookId: String!, $title: String!, $description: String!, $authors: [String], $image: String!, $link: String!) {
-    saveBook(userId: $userId, bookId: $bookId, title: $title, description: $description, authors: $authors, image: $image, link: $link) {
+  mutation saveBook($userId: ID!, $authors: [String], $bookId: String!, $description: String!, $image: String!, $title: String!, $link: String!) {
+    saveBook(userId: $userId, authors: $authors, bookId: $bookId, description: $description, image: $image, title: $title, link: $link) {
       _id
-      bookId
-      title
-      description
       authors
+      bookId
+      description
+      title
       image
       link
     }

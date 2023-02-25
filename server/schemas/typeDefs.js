@@ -2,10 +2,11 @@ const { gql } = require('apollo-server-express');
 
 // me(email: String!): User!
 const typeDefs = gql`
+
   type Query {
     users: [User]
     user(userId: ID!): User
-    me: User!
+    me: User
   }
 
   input BookArgs {

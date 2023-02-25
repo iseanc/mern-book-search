@@ -43,11 +43,12 @@ const SignupForm = () => {
 
     try   {   
       // BUG: CODE IS FAILING
+      console.log("starting try...catch", userFormData)
       const { data } = await addUser({
         variables: { ...userFormData },
       })
 
-      Auth.login(data.addUsers.token);
+      Auth.login(data.addUser.token);
 
     } catch (e) {
       console.error(e);

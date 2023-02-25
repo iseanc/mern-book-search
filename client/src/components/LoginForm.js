@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [gqlLogin, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,11 +45,12 @@ const LoginForm = () => {
     //   setShowAlert(true);
     // }
     try {
-      const { data } = await login({
+      const { data } = await gqlLogin({
         variables: { ...userFormData },
       }, 
       {
         if(error) { 
+          console.log("promise...", error);
           throw new Error(error)
         }
       });
