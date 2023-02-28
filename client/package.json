@@ -1,9 +1,9 @@
 {
-  "proxy": "http://localhost:3001",
   "name": "client",
   "version": "0.1.0",
   "private": true,
   "comments": {
+    "proxy": "http://localhost:3001"
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
