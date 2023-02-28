@@ -2,6 +2,7 @@ const express = require('express');
 // require Apollo Server
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
+const { authMiddleware } = require('./utils/auth');
 // setup for typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -11,10 +12,33 @@ const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+//Apollo Server logging plugin
+const BASIC_LOGGING = {
+  requestDidStart(requestContext) {
+      console.log("request started");
+      // console.log(requestContext.request.query);
+      // console.log(requestContext.request.variables);
+      console.group(requestContext)
+      return {
+          didEncounterErrors(requestContext) {
+              console.log("an error happened in response to query " + requestContext.request.query);
+              console.log(requestContext.errors);
+          }
+      };
+  },
+
+  willSendResponse(requestContext) {
+      console.log("response sent", requestContext.response);
+  }
+};
+
 // create Apollo Server instance
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware,
+  plugins: [BASIC_LOGGING],
 });
 
 app.use(express.urlencoded({ extended: true }));
