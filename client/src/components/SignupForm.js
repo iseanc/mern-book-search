@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-// import { createUser } from '../utils/API';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
@@ -42,7 +41,6 @@ const SignupForm = () => {
     }
 
     try   {   
-      // BUG: CODE IS FAILING
       console.log("starting try...catch", userFormData)
       const { data } = await addUser({
         variables: { ...userFormData },

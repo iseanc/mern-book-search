@@ -7,9 +7,6 @@ const resolvers = {
   users: async () => {
     return await User.find({});
   },
-  // me: async (parent, { email } ) => {
-  //   return await User.findOne({ email: email });
-  // },
   // By adding context to our query, we can retrieve the logged in user without specifically searching for them
   me: async (parent, args, context) => {
     if (context.user) {
@@ -44,18 +41,11 @@ const resolvers = {
 
     return { token, user };
   },
-  // saveBook: async (parent, { userId, book }, context) => {
   saveBook: async (parent, { userId, authors, description, title, bookId, image, link }, context) => {
-    // return User.findOneAndUpdate(
-    //   { _id: userId},
-    //   { $addToSet: { savedBooks: Book} },
-    //   { new: true, runValidators: true }
-    // );
     // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
     if (context.user) {
       return User.findOneAndUpdate(
         { _id: context.user._id },
-        // { $addToSet: { savedBooks: book}, },
         { $addToSet: { savedBooks: { authors, description, title, bookId, image, link }}},
         { new: true, runValidators: true, }
       );

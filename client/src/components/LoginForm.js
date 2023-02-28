@@ -4,8 +4,6 @@ import { Form, Button, Alert } from 'react-bootstrap';
 // import GraphQL useMutation and LOGIN_USER functionality
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations'
-// above GraphQL items should replace loginUser route-based authentication
-// import { loginUser } from '../utils/API';
 // KEEP Auth implementation
 import Auth from '../utils/auth';
 
@@ -30,20 +28,6 @@ const LoginForm = () => {
       event.stopPropagation();
     }
 
-    // try {
-    //   const response = await loginUser(userFormData);
-
-    //   if (!response.ok) {
-    //     throw new Error('something went wrong!');
-    //   }
-
-    //   const { token, user } = await response.json();
-    //   console.log(user);
-    //   Auth.login(token);
-    // } catch (err) {
-    //   console.error(err);
-    //   setShowAlert(true);
-    // }
     try {
       const { data } = await gqlLogin({
         variables: { ...userFormData },
